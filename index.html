@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumen - Không gian tập trung</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root { --ink:#17211b; --muted:#718078; --line:#e6ece7; --paper:#f7faf7; --white:#fff; --mint:#cfe9d8; --green:#2f7d57; --lime:#d9ef91; --coral:#ef876d; --shadow:0 18px 50px rgba(31,67,48,.09); }
+        * { box-sizing:border-box; }
+        body { margin:0; color:var(--ink); background:var(--paper); font-family:'DM Sans',sans-serif; }
+        button,input { font:inherit; }
+        button { cursor:pointer; border:0; }
+        .app { display:flex; min-height:100vh; }
+        .sidebar { width:238px; padding:28px 18px; border-right:1px solid var(--line); background:#fbfdfb; display:flex; flex-direction:column; }
+        .brand { display:flex; align-items:center; gap:10px; padding:0 12px 38px; font:700 23px 'Space Grotesk'; letter-spacing:-.5px; }
+        .brand-mark { width:31px; height:31px; border-radius:10px 10px 10px 3px; background:var(--green); color:#fff; display:grid; place-items:center; }
+        .brand-mark i { width:17px; height:17px; }
+        .nav-label { padding:0 13px 10px; color:#a0aca5; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; }
+        nav { display:grid; gap:5px; }
+        .nav-item { display:flex; align-items:center; gap:13px; padding:11px 13px; color:var(--muted); border-radius:10px; font-size:14px; text-align:left; background:transparent; }
+        .nav-item:hover,.nav-item.active { color:var(--green); background:#eaf5ed; font-weight:600; }
+        .nav-item i { width:18px; }
+        .badge { margin-left:auto; min-width:22px; padding:3px 6px; border-radius:20px; background:#f1f5f1; color:var(--muted); text-align:center; font-size:11px; }
+        .sidebar-bottom { margin-top:auto; }
+        .upgrade { padding:17px; border-radius:14px; background:var(--ink); color:white; overflow:hidden; position:relative; }
+        .upgrade:after { content:''; position:absolute; width:70px; height:70px; right:-20px; bottom:-26px; border-radius:50%; background:var(--lime); }
+        .upgrade strong { display:block; font:600 14px 'Space Grotesk'; position:relative; z-index:1; }
+        .upgrade p { margin:7px 0 15px; color:#b9c7bd; font-size:12px; line-height:1.45; position:relative; z-index:1; }
+        .upgrade button { padding:8px 11px; border-radius:7px; background:var(--lime); color:var(--ink); font-size:12px; font-weight:700; position:relative; z-index:1; }
+        main { flex:1; min-width:0; padding:27px 4.5%; }
+        .topbar { display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:33px; }
+        .greeting small { color:var(--muted); font-size:13px; }
+        h1 { margin:6px 0 0; font:600 clamp(24px,3vw,32px) 'Space Grotesk'; letter-spacing:-1px; }
+        .actions { display:flex; align-items:center; gap:11px; }
+        .icon-btn { width:39px; height:39px; display:grid; place-items:center; border:1px solid var(--line); border-radius:10px; background:var(--white); color:var(--muted); position:relative; }
+        .icon-btn:hover { color:var(--green); border-color:var(--mint); }
+        .icon-btn i { width:17px; }
+        .dot { position:absolute; right:8px; top:8px; width:5px; height:5px; border-radius:50%; background:var(--coral); }
+        .avatar { width:39px; height:39px; border-radius:50%; display:grid; place-items:center; background:#f4cbbd; color:#7f4c3c; font-weight:700; font-size:13px; }
+        .grid { display:grid; grid-template-columns:1.6fr 1fr; gap:22px; }
+        .panel { background:var(--white); border:1px solid var(--line); border-radius:15px; box-shadow:var(--shadow); }
+        .hero { min-height:221px; padding:25px 28px; background:var(--mint); border:0; position:relative; overflow:hidden; }
+        .hero:after { content:''; position:absolute; right:-46px; top:-55px; width:205px; height:205px; border:30px solid rgba(255,255,255,.32); border-radius:50%; }
+        .eyebrow { color:var(--green); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.3px; }
+        .hero h2 { max-width:390px; margin:12px 0 10px; font:600 26px 'Space Grotesk'; line-height:1.16; letter-spacing:-.8px; position:relative; z-index:1; }
+        .hero p { max-width:360px; margin:0; color:#476555; font-size:13px; line-height:1.5; }
+        .progress-wrap { margin-top:22px; max-width:390px; }
+        .progress-line { display:flex; justify-content:space-between; margin-bottom:8px; font-size:11px; color:#527362; }
+        .progress { height:7px; border-radius:10px; background:rgba(255,255,255,.65); overflow:hidden; }
+        .progress span { display:block; width:68%; height:100%; border-radius:inherit; background:var(--green); }
+        .stats { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+        .stat { padding:20px; min-height:100px; }
+        .stat-top { display:flex; justify-content:space-between; color:var(--muted); font-size:12px; }
+        .stat h3 { margin:12px 0 2px; font:600 27px 'Space Grotesk'; }
+        .stat p { margin:0; color:var(--green); font-size:11px; }
+        .stat:nth-child(2) p { color:#c56d59; }
+        .section { grid-column:1 / -1; }
+        .section-head { display:flex; justify-content:space-between; align-items:center; margin:28px 0 14px; }
+        .schedule .section-head { margin:0 0 5px; }
+        .section-head h2 { margin:0; font:600 18px 'Space Grotesk'; letter-spacing:-.4px; }
+        .section-head button { color:var(--green); background:transparent; font-size:12px; font-weight:600; }
+        .task-layout { display:grid; grid-template-columns:1.4fr .9fr; gap:22px; }
+        .tasks { padding:8px 20px; }
+        .task { display:flex; align-items:center; gap:13px; padding:16px 0; border-bottom:1px solid #f0f3f0; }
+        .task:last-child { border:0; }
+        .check { flex:0 0 19px; width:19px; height:19px; border:1.5px solid #b7c6bb; border-radius:6px; background:#fff; display:grid; place-items:center; color:#fff; }
+        .check:hover { border-color:var(--green); }
+        .task.done .check { background:var(--green); border-color:var(--green); }
+        .task.done .task-title { color:#a0aca5; text-decoration:line-through; }
+        .task-content { min-width:0; flex:1; }
+        .task-title { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13px; font-weight:600; }
+        .task-meta { display:block; margin-top:5px; color:var(--muted); font-size:11px; }
+        .tag { padding:5px 8px; border-radius:6px; background:#f2f6f2; color:var(--muted); font-size:10px; white-space:nowrap; }
+        .tag.green { background:#e3f3e6; color:var(--green); }
+        .tag.orange { background:#fff0e9; color:#c76c54; }
+        .schedule { padding:20px; }
+        .schedule-date { color:var(--muted); font-size:12px; }
+        .event { display:flex; gap:12px; padding:14px 0; border-bottom:1px solid #f0f3f0; }
+        .event:last-child { border:0; }
+        .event-time { width:43px; color:var(--muted); font-size:11px; line-height:1.4; }
+        .event-body { padding-left:12px; border-left:3px solid var(--coral); }
+        .event:nth-of-type(3) .event-body { border-color:var(--green); }
+        .event-title { font-size:12px; font-weight:700; }
+        .event-body small { display:block; margin-top:4px; color:var(--muted); font-size:10px; }
+        .quick-add { display:flex; gap:10px; margin-top:15px; }
+        .quick-add input { min-width:0; flex:1; padding:11px 13px; border:1px solid var(--line); border-radius:9px; outline:0; background:#fbfdfb; font-size:12px; }
+        .quick-add input:focus { border-color:var(--green); }
+        .add-btn { width:42px; border-radius:9px; background:var(--green); color:#fff; display:grid; place-items:center; }
+        .add-btn i { width:17px; }
+        .toast { position:fixed; bottom:24px; right:24px; padding:13px 17px; color:#fff; background:var(--ink); border-radius:9px; box-shadow:var(--shadow); font-size:13px; transform:translateY(100px); transition:.25s; }
+        .toast.show { transform:translateY(0); }
+        .search { display:none; position:absolute; right:80px; top:78px; width:240px; padding:11px 13px; border:1px solid var(--line); border-radius:9px; outline:0; box-shadow:var(--shadow); }
+        body.dark { --ink:#edf5ef; --muted:#9dad9f; --line:#26372c; --paper:#152019; --white:#1b2b21; --mint:#294837; --green:#79c995; --lime:#d9ef91; }
+        body.dark .sidebar { background:#18261d; } body.dark .hero p { color:#b4d3bb; } body.dark .nav-item:hover,body.dark .nav-item.active { background:#274634; } body.dark .progress-line { color:#c5dfca; } body.dark .quick-add input { background:#16251c; color:var(--ink); }
+        @media (max-width:860px) { .sidebar { width:70px; padding:22px 10px; } .brand { padding:0 10px 35px; } .brand span,.nav-label,.nav-item span,.badge,.upgrade { display:none; } .nav-item { justify-content:center; padding:12px; } main { padding:24px; } }
+        @media (max-width:650px) { .app { display:block; } .sidebar { width:100%; height:64px; padding:12px 18px; flex-direction:row; align-items:center; border-right:0; border-bottom:1px solid var(--line); } .brand { padding:0; } nav { display:flex; margin-left:auto; gap:3px; } .sidebar-bottom { display:none; } .nav-item { width:38px; height:38px; } main { width:100%; max-width:100%; padding:22px 16px 35px; overflow:hidden; } .topbar { flex-wrap:wrap; margin-bottom:25px; } .greeting { width:100%; } .actions { width:100%; justify-content:flex-end; gap:7px; } .grid,.task-layout { grid-template-columns:1fr; gap:14px; } .stats { gap:12px; } .hero { min-height:235px; } .section { grid-column:auto; } .section-head { margin-top:24px; } .search { right:50px; top:73px; width:calc(100% - 66px); } }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="brand"><div class="brand-mark"><i data-lucide="sparkles"></i></div><span>Lumen</span></div>
+            <div class="nav-label">Không gian làm việc</div>
+            <nav>
+                <button class="nav-item active"><i data-lucide="layout-dashboard"></i><span>Tổng quan</span></button>
+                <button class="nav-item"><i data-lucide="check-square"></i><span>Công việc</span><b class="badge">12</b></button>
+                <button class="nav-item"><i data-lucide="calendar-days"></i><span>Lịch của tôi</span></button>
+                <button class="nav-item"><i data-lucide="bar-chart-3"></i><span>Phân tích</span></button>
+            </nav>
+            <div class="sidebar-bottom"><div class="upgrade"><strong>Mở khóa nhịp điệu</strong><p>Biến mục tiêu lớn thành những bước nhỏ.</p><button>Nâng cấp không gian</button></div></div>
+        </aside>
+        <main>
+            <header class="topbar">
+                <div class="greeting"><small>Thứ Sáu, 22 tháng 8, 2026</small><h1>Chào buổi sáng, Minh.</h1></div>
+                <div class="actions"><button class="icon-btn" id="searchBtn" aria-label="Tìm kiếm"><i data-lucide="search"></i></button><input class="search" id="searchInput" placeholder="Tìm công việc..."><button class="icon-btn" id="themeBtn" aria-label="Đổi giao diện"><i data-lucide="sun"></i></button><button class="icon-btn" aria-label="Thông báo"><i data-lucide="bell"></i><span class="dot"></span></button><div class="avatar">MN</div></div>
+            </header>
+            <div class="grid">
+                <section class="hero panel"><div class="eyebrow">Mục tiêu hôm nay</div><h2>Một ngày rõ ràng bắt đầu từ một bước nhỏ.</h2><p>Bạn đang đi đúng hướng. Hãy giữ nhịp và dành sự chú ý cho điều quan trọng nhất.</p><div class="progress-wrap"><div class="progress-line"><span>Tiến độ trong ngày</span><strong>68%</strong></div><div class="progress"><span></span></div></div></section>
+                <section class="stats"><div class="stat panel"><div class="stat-top"><span>Đã hoàn thành</span><i data-lucide="circle-check"></i></div><h3>24</h3><p>+12% tuần này</p></div><div class="stat panel"><div class="stat-top"><span>Giờ tập trung</span><i data-lucide="timer"></i></div><h3>18.5h</h3><p>+2.5h tuần này</p></div></section>
+                <section class="section"><div class="section-head"><h2>Cần hoàn thành hôm nay</h2><button id="filterBtn">Xem tất cả <i data-lucide="arrow-up-right"></i></button></div><div class="task-layout"><div class="tasks panel" id="taskList"><div class="task"><button class="check" aria-label="Đánh dấu hoàn thành"><i data-lucide="check"></i></button><div class="task-content"><span class="task-title">Hoàn thiện bản trình bày Q3</span><small class="task-meta">Hạn 10:30 · Dự án Atlas</small></div><span class="tag orange">Ưu tiên cao</span></div><div class="task"><button class="check" aria-label="Đánh dấu hoàn thành"><i data-lucide="check"></i></button><div class="task-content"><span class="task-title">Gửi email cập nhật cho nhóm</span><small class="task-meta">Hạn 13:00 · Công việc</small></div><span class="tag green">Công việc</span></div><div class="task done"><button class="check" aria-label="Đã hoàn thành"><i data-lucide="check"></i></button><div class="task-content"><span class="task-title">Đặt lịch họp sprint tuần tới</span><small class="task-meta">Đã hoàn thành lúc 09:15</small></div><span class="tag">Đã xong</span></div><div class="quick-add"><input id="taskInput" placeholder="Thêm công việc mới..." aria-label="Tên công việc mới"><button class="add-btn" id="addTask" aria-label="Thêm công việc"><i data-lucide="plus"></i></button></div></div><div class="schedule panel"><div class="section-head"><h2>Lịch hôm nay</h2><i data-lucide="more-horizontal"></i></div><span class="schedule-date">Thứ Sáu · 22 tháng 8</span><div class="event"><span class="event-time">10:30<br>11:15</span><div class="event-body"><span class="event-title">Họp thiết kế sản phẩm</span><small>Phòng Maple · 4 người</small></div></div><div class="event"><span class="event-time">14:00<br>15:00</span><div class="event-body"><span class="event-title">Deep work · Dự án Atlas</span><small>Không gian tập trung</small></div></div><div class="event"><span class="event-time">16:30<br>17:00</span><div class="event-body"><span class="event-title">Tổng kết ngày</span><small>30 phút cho chính mình</small></div></div></div></div></section>
+            </div>
+        </main>
+    </div>
+    <div class="toast" id="toast"></div>
+    <script>
+        lucide.createIcons();
+        const toast = message => { const el = document.getElementById('toast'); el.textContent = message; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 2200); };
+        document.querySelectorAll('.check').forEach(button => button.addEventListener('click', () => { const task = button.closest('.task'); task.classList.toggle('done'); toast(task.classList.contains('done') ? 'Đã đánh dấu hoàn thành' : 'Đã mở lại công việc'); }));
+        document.querySelectorAll('.nav-item').forEach(item => item.addEventListener('click', () => { document.querySelector('.nav-item.active').classList.remove('active'); item.classList.add('active'); toast(item.querySelector('span').textContent + ' đang được mở'); }));
+        const search = document.getElementById('searchInput');
+        document.getElementById('searchBtn').addEventListener('click', () => { search.style.display = search.style.display === 'block' ? 'none' : 'block'; if (search.style.display === 'block') search.focus(); });
+        search.addEventListener('input', event => { const query = event.target.value.toLowerCase(); document.querySelectorAll('.task').forEach(task => { task.style.display = task.textContent.toLowerCase().includes(query) ? 'flex' : 'none'; }); });
+        document.getElementById('themeBtn').addEventListener('click', () => { document.body.classList.toggle('dark'); toast(document.body.classList.contains('dark') ? 'Đã bật giao diện tối' : 'Đã bật giao diện sáng'); });
+        document.getElementById('addTask').addEventListener('click', () => { const input = document.getElementById('taskInput'); const title = input.value.trim(); if (!title) { input.focus(); return; } const task = document.createElement('div'); task.className = 'task'; task.innerHTML = '<button class="check" aria-label="Đánh dấu hoàn thành"><i data-lucide="check"></i></button><div class="task-content"><span class="task-title"></span><small class="task-meta">Mới thêm · Hôm nay</small></div><span class="tag green">Mới</span>'; task.querySelector('.task-title').textContent = title; task.querySelector('.check').addEventListener('click', () => { task.classList.toggle('done'); toast(task.classList.contains('done') ? 'Đã đánh dấu hoàn thành' : 'Đã mở lại công việc'); }); document.getElementById('taskList').insertBefore(task, document.querySelector('.quick-add')); lucide.createIcons(); input.value = ''; toast('Đã thêm công việc mới'); });
+        document.getElementById('taskInput').addEventListener('keydown', event => { if (event.key === 'Enter') document.getElementById('addTask').click(); });
+        document.getElementById('filterBtn').addEventListener('click', () => toast('Đang hiển thị tất cả công việc'));
+    </script>
+</body>
+</html>
