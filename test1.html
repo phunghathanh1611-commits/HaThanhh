@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevAcademy - Nền Tảng Học Lập Trình Hiện Đại</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loader" class="loader-container">
+        <div class="spinner"></div>
+    </div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-code"></i> Dev<span>Academy</span>
+            </a>
+            
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm khóa học...">
+                <button id="searchBtn"><i class="fa-solid fa-search"></i></button>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Trang chủ</a></li>
+                <li><a href="#courses">Khóa học</a></li>
+                <li><a href="#features">Tính năng</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button id="theme-toggle" class="theme-btn">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button class="btn btn-outline" onclick="openModal('login')">Đăng Nhập</button>
+                <button class="btn btn-primary" onclick="openModal('register')">Đăng Ký</button>
+            </div>
+
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <div class="search-bar-mobile">
+            <input type="text" placeholder="Tìm kiếm...">
+            <button><i class="fa-solid fa-search"></i></button>
+        </div>
+        <a href="#home" class="mobile-link">Trang chủ</a>
+        <a href="#courses" class="mobile-link">Khóa học</a>
+        <a href="#features" class="mobile-link">Tính năng</a>
+        <div class="mobile-auth">
+            <button class="btn btn-outline" onclick="openModal('login')">Đăng Nhập</button>
+            <button class="btn btn-primary" onclick="openModal('register')">Đăng Ký</button>
+        </div>
+    </div>
+
+    <header id="home" class="hero">
+        <div class="hero-content reveal">
+            <h1>Khởi Đầu Sự Nghiệp Lập Trình Của Bạn Ngay Hôm Nay</h1>
+            <p>Học code qua các dự án thực tế với sự hướng dẫn của các chuyên gia hàng đầu. Bứt phá giới hạn và xây dựng tương lai.</p>
+            <div class="hero-buttons">
+                <a href="#courses" class="btn btn-primary btn-large">Khám Phá Khóa Học</a>
+                <a href="#features" class="btn btn-outline btn-large">Tìm Hiểu Thêm</a>
+            </div>
+        </div>
+        <div class="hero-image reveal">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Lập trình viên đang code">
+        </div>
+    </header>
+
+    <section id="courses" class="section">
+        <h2 class="section-title reveal">Các Khóa Học Nổi Bật</h2>
+        <div class="grid-container">
+            <div class="card reveal">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1627398225258-14f0438084f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Web Frontend">
+                    <span class="badge">Phổ biến</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span><i class="fa-solid fa-clock"></i> 12 Tuần</span>
+                        <span><i class="fa-solid fa-star"></i> 4.9</span>
+                    </div>
+                    <h3>Lập Trình Web Frontend Master</h3>
+                    <p>Thành thạo HTML, CSS, JavaScript và ReactJS để xây dựng giao diện người dùng hiện đại.</p>
+                    <div class="card-footer">
+                        <span class="price">1.500.000đ</span>
+                        <button class="btn btn-primary btn-sm">Đăng ký ngay</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card reveal">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Backend Node.js">
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span><i class="fa-solid fa-clock"></i> 10 Tuần</span>
+                        <span><i class="fa-solid fa-star"></i> 4.8</span>
+                    </div>
+                    <h3>Backend NodeJS & MongoDB</h3>
+                    <p>Xây dựng API mạnh mẽ, bảo mật và quản lý cơ sở dữ liệu hiệu quả với hệ sinh thái JavaScript.</p>
+                    <div class="card-footer">
+                        <span class="price">1.800.000đ</span>
+                        <button class="btn btn-primary btn-sm">Đăng ký ngay</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card reveal">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bfce8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Python Data Science">
+                    <span class="badge new">Mới</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span><i class="fa-solid fa-clock"></i> 8 Tuần</span>
+                        <span><i class="fa-solid fa-star"></i> 5.0</span>
+                    </div>
+                    <h3>Phân Tích Dữ Liệu Python</h3>
+                    <p>Làm chủ Python, Pandas và matplotlib để khai phá sức mạnh của dữ liệu trong doanh nghiệp.</p>
+                    <div class="card-footer">
+                        <span class="price">2.000.000đ</span>
+                        <button class="btn btn-primary btn-sm">Đăng ký ngay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section bg-alt">
+        <h2 class="section-title reveal">Vì Sao Chọn DevAcademy?</h2>
+        <div class="grid-container">
+            <div class="feature-box reveal">
+                <div class="feature-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                <h3>Thực Hành 80%</h3>
+                <p>Học đi đôi với hành. Xây dựng portfolio cá nhân ấn tượng ngay trong quá trình học.</p>
+            </div>
+            <div class="feature-box reveal">
+                <div class="feature-icon"><i class="fa-solid fa-user-tie"></i></div>
+                <h3>Mentor Tận Tâm</h3>
+                <p>Được hỗ trợ 1-1 bởi các lập trình viên giàu kinh nghiệm đang làm việc tại các công ty công nghệ lớn.</p>
+            </div>
+            <div class="feature-box reveal">
+                <div class="feature-icon"><i class="fa-solid fa-certificate"></i></div>
+                <h3>Chứng Nhận Uy Tín</h3>
+                <p>Nhận chứng chỉ hoàn thành khóa học được công nhận bởi nhiều doanh nghiệp đối tác.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container reveal">
+            <div class="footer-about">
+                <h2><i class="fa-solid fa-code"></i> Dev<span>Academy</span></h2>
+                <p>Nền tảng đào tạo lập trình viên thực chiến, giúp bạn tự tin bước vào thế giới công nghệ.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Liên Kết Nhanh</h3>
+                <ul>
+                    <li><a href="#home">Trang chủ</a></li>
+                    <li><a href="#courses">Khóa học</a></li>
+                    <li><a href="#features">Tính năng</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Liên Hệ</h3>
+                <p><i class="fa-solid fa-location-dot"></i> 123 Đường Lập Trình, Hà Nội</p>
+                <p><i class="fa-solid fa-phone"></i> +84 123 456 789</p>
+                <p><i class="fa-solid fa-envelope"></i> contact@devacademy.vn</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 DevAcademy. Bản quyền thuộc về Senior Frontend Developer.</p>
+        </div>
+    </footer>
+
+    <button id="back-to-top" title="Lên đầu trang"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            
+            <div class="modal-header">
+                <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">Đăng Nhập</button>
+                <button class="tab-btn" id="tab-register" onclick="switchTab('register')">Đăng Ký</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="login-form" class="auth-form active-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="Nhập email của bạn">
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Mật khẩu</label>
+                        <input type="password" id="login-password" placeholder="Nhập mật khẩu">
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-options">
+                        <label><input type="checkbox"> Nhớ mật khẩu</label>
+                        <a href="#" class="forgot-pwd">Quên mật khẩu?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Đăng Nhập</button>
+                    <div class="form-status"></div>
+                </form>
+
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="reg-name">Họ và tên</label>
+                        <input type="text" id="reg-name" placeholder="Nhập họ và tên">
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" placeholder="Nhập email của bạn">
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Mật khẩu</label>
+                        <input type="password" id="reg-password" placeholder="Tạo mật khẩu (Ít nhất 6 ký tự)">
+                        <span class="error-message"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Tạo Tài Khoản</button>
+                    <div class="form-status"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
